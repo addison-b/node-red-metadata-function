@@ -1,10 +1,7 @@
 //str variable set to payload contents for easier manipulation
 str = msg.payload
 
-/*
-Declaring these because from what I gather - functions don't like
-it when you try to declare variables inside them.
-*/
+//Declaring this right away - not needed but the isolateCat function wasn't playing nice
 var catSelection = "**No Selection**"
 var artist = ""
 var assetType = ""
@@ -163,6 +160,80 @@ function dropCats(s2) {
 }
 
 /*
+The reOrderSong function takes all the song data points and puts them in the
+right order for Triton
+
+This calls isolateCat for each desired category and dumps it into the 
+corresponding variables. After that I just make the str variable out of
+all the song variables stuck together.
+
+I can't tell if I'm proud or ashamed of this.
+*/
+function reOrderSong() {
+    isolateCat("Artist=")
+    songArtist = catSelection
+    
+    isolateCat("Album=")
+    songAlbum = catSelection
+    
+    isolateCat("Title=")
+    songTitle = catSelection
+    
+    isolateCat("ISRC=")
+    songISRC = catSelection
+    
+    isolateCat("Runtime=")
+    songRuntime = catSelection
+    
+    isolateCat("Asset_Type=")
+    songAssettype = catSelection
+    
+    /*Ideally I want to move this line to its own function and be asset agnostic for processing links and spots. 
+    Something like grabbing all data points into their own variables.*/
+    str = songArtist + "~" + songAlbum + "~" + songTitle + "~" + songRuntime + "~" + songAssettype
+}
+
+/*
+I may not actually use this, but leaving it in case I do need it.
+*/
+function reOrderData(p0,p1,p2,p3,p4,p5) {
+	
+	isolateCat(p0)
+	p0 = catSelection
+	
+	isolateCat(p1)
+	p1 = catSelection
+	
+	isolateCat(p2)
+	p2 = catSelection
+	
+	isolateCat(p3)
+	p3 = catSelection
+	
+	isolateCat(p4)
+	p4 = catSelection
+	
+	isolateCat(p5)
+	p5 = catSelection
+	
+	
+	
+	
+	/*
+	if (p5 == -1){
+		
+		str = p0 + "~" + p1 + "~" + p2 + "~" + p3 + "~" + p4
+		
+	} else{
+		
+		str = p0 + "~" + p1 + "~" + p2 + "~" + p3 + "~" + p4 + "~" + p5
+		
+	}
+	*/
+	
+}
+
+/*
 This will be used to dump every data point into its own variable to be added together later.
 */
 function dataToVar() {
@@ -258,11 +329,20 @@ Songs need processed a little differently
 This "if" splits it off separate.
 */
 if(str.search("Asset_Type=Song") == -1){
-
+    
+    //trimExtra("Category")
+	
 	str = linkOwner + "~" + album + "~" + title + "~" + runtime + "~" + assetType + "~" + category;
 
 }else{
- 
+    /*
+    trimExtra("AlbumLabel")
+    trimExtra("ReleaseYear")
+    trimExtra("Category")
+    */
+	//reOrderData("Artist=","Album=","Title=","Runtime","Asset_Type")
+    //reOrderSong()
+	
 	str = artist + "~" + album + "~" + title + "~" + runtime + "~" + assetType + "~" + category;
 }
 
