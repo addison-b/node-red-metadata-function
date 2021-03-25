@@ -4,6 +4,12 @@
   
 For better or for worse, we chose to manipulate the semicolon separated metadata string with Node-RED. There's a bit of filtering and tagging that goes on prior to the messages getting processed through this function node, but this basically does it all.
 
+# Why is the code so weird?
+
+  Something to note, I'm a sysadmin with very little scripting experience, this is my first time using javascript and I more or less brute forced my way through learning how these methods work. 
+ 
+ If you see something I've done in here that looks horribly dreadfully wrong and out of line, I'm sorry, I didn't know better and was working with a deadline. I welcome criticism though! Go ahead and report an issue or something (I obviously am new to github as well). Unfortunately, I'm busy and may take a long time to respond.
+
 # Before and After
 <sup>*Here is an example of what this function does to the messages, if you want to understand it more, read the code comments.*</sup>
 
