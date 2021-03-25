@@ -1,8 +1,12 @@
 //str variable set to payload contents for easier manipulation
 str = msg.payload
 
-//Declaring this right away - not needed but the isolateCat function wasn't playing nice
+/*
+Declaring these because from what I gather - functions don't like
+it when you try to declare variables inside them.
+*/
 var catSelection = "**No Selection**"
+
 var artist = ""
 var assetType = ""
 var album = ""	
@@ -20,6 +24,10 @@ var albumLabel = ""
 var releaseYear = ""
 var linkOwner = ""
 
+//These are the approved categories for the time being. This may not be in use.
+var goodCats = ["pg1","pg2","pg3"]
+
+var badCat = false
 
 
 /*
@@ -160,80 +168,6 @@ function dropCats(s2) {
 }
 
 /*
-The reOrderSong function takes all the song data points and puts them in the
-right order for Triton
-
-This calls isolateCat for each desired category and dumps it into the 
-corresponding variables. After that I just make the str variable out of
-all the song variables stuck together.
-
-I can't tell if I'm proud or ashamed of this.
-*/
-function reOrderSong() {
-    isolateCat("Artist=")
-    songArtist = catSelection
-    
-    isolateCat("Album=")
-    songAlbum = catSelection
-    
-    isolateCat("Title=")
-    songTitle = catSelection
-    
-    isolateCat("ISRC=")
-    songISRC = catSelection
-    
-    isolateCat("Runtime=")
-    songRuntime = catSelection
-    
-    isolateCat("Asset_Type=")
-    songAssettype = catSelection
-    
-    /*Ideally I want to move this line to its own function and be asset agnostic for processing links and spots. 
-    Something like grabbing all data points into their own variables.*/
-    str = songArtist + "~" + songAlbum + "~" + songTitle + "~" + songRuntime + "~" + songAssettype
-}
-
-/*
-I may not actually use this, but leaving it in case I do need it.
-*/
-function reOrderData(p0,p1,p2,p3,p4,p5) {
-	
-	isolateCat(p0)
-	p0 = catSelection
-	
-	isolateCat(p1)
-	p1 = catSelection
-	
-	isolateCat(p2)
-	p2 = catSelection
-	
-	isolateCat(p3)
-	p3 = catSelection
-	
-	isolateCat(p4)
-	p4 = catSelection
-	
-	isolateCat(p5)
-	p5 = catSelection
-	
-	
-	
-	
-	/*
-	if (p5 == -1){
-		
-		str = p0 + "~" + p1 + "~" + p2 + "~" + p3 + "~" + p4
-		
-	} else{
-		
-		str = p0 + "~" + p1 + "~" + p2 + "~" + p3 + "~" + p4 + "~" + p5
-		
-	}
-	*/
-	
-}
-
-/*
 This will be used to dump every data point into its own variable to be added together later.
 */
 function dataToVar() {
@@ -289,7 +223,24 @@ function dataToVar() {
 	
 }
 
+/*
+This is for filtering categories out.
 
+This may not be needed, but I wanted to lay down a bit of groundwork. 
+*/
+function checkCategory() {
+	//if([a,b,c,d,e].indexOf(x) !== -1) {
+
+	if(goodCats.indexOf(category) !== -1 {
+		/*"Category" gets checked against the "goodCats" array, if found, it returns its index
+		If it is not found, it returns -1. This block is where the "good category" consequences
+		are applied, and the "else" will be if -1 is returned.
+		*/
+	} else {
+		badCat = True
+	}
+	
+}
 
 //dropUnused is called for each data point.
 dropUnused(" Asset_Type=")
@@ -310,8 +261,9 @@ dropUnused(" ReleaseYear=")
 dropUnused(" LinkOwner=")
 
 /*
-This blurb here may end up being deprecated later on if I build another 
-funtion for links and spots like the reOrderSong one. 
+This blurb here may end up being deprecated later on if I switch semicolons
+another way in the functions, currently its just an ugly way of changing the
+separators from ; to ~. It used to be more essential but is now pretty obsolete. 
 
 These 3 lines make the string point into an array split with semicolons.
 The array then gets reversed, this is cause the order Triton wants the data
@@ -329,24 +281,16 @@ Songs need processed a little differently
 This "if" splits it off separate.
 */
 if(str.search("Asset_Type=Song") == -1){
-    
-    //trimExtra("Category")
 	
+	//LinkOwner is being placed in as the Artist for things that aren't spots.
 	str = linkOwner + "~" + album + "~" + title + "~" + runtime + "~" + assetType + "~" + category;
 
 }else{
-    /*
-    trimExtra("AlbumLabel")
-    trimExtra("ReleaseYear")
-    trimExtra("Category")
-    */
-	//reOrderData("Artist=","Album=","Title=","Runtime","Asset_Type")
-    //reOrderSong()
-	
+ 
 	str = artist + "~" + album + "~" + title + "~" + runtime + "~" + assetType + "~" + category;
 }
 
-//Drops Categories
+//Drops Categories - the "Album=" bits.
 dropCats(str)
 
 //Adds the Triton start and end characters.
