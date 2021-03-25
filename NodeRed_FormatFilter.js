@@ -6,6 +6,7 @@ Declaring these because from what I gather - functions don't like
 it when you try to declare variables inside them.
 */
 var catSelection = "**No Selection**"
+
 var artist = ""
 var assetType = ""
 var album = ""	
@@ -23,6 +24,10 @@ var albumLabel = ""
 var releaseYear = ""
 var linkOwner = ""
 
+//These are the approved categories for the time being. This may not be in use.
+var goodCats = ["pg1","pg2","pg3"]
+
+var badCat = false
 
 
 /*
@@ -218,7 +223,24 @@ function dataToVar() {
 	
 }
 
+/*
+This is for filtering categories out.
 
+This may not be needed, but I wanted to lay down a bit of groundwork. 
+*/
+function checkCategory() {
+	//if([a,b,c,d,e].indexOf(x) !== -1) {
+
+	if(goodCats.indexOf(category) !== -1 {
+		/*"Category" gets checked against the "goodCats" array, if found, it returns its index
+		If it is not found, it returns -1. This block is where the "good category" consequences
+		are applied, and the "else" will be if -1 is returned.
+		*/
+	} else {
+		badCat = True
+	}
+	
+}
 
 //dropUnused is called for each data point.
 dropUnused(" Asset_Type=")
@@ -239,8 +261,9 @@ dropUnused(" ReleaseYear=")
 dropUnused(" LinkOwner=")
 
 /*
-This blurb here may end up being deprecated later on if I build another 
-funtion for links and spots like the reOrderSong one. 
+This blurb here may end up being deprecated later on if I switch semicolons
+another way in the functions, currently its just an ugly way of changing the
+separators from ; to ~. It used to be more essential but is now pretty obsolete. 
 
 These 3 lines make the string point into an array split with semicolons.
 The array then gets reversed, this is cause the order Triton wants the data
@@ -258,7 +281,8 @@ Songs need processed a little differently
 This "if" splits it off separate.
 */
 if(str.search("Asset_Type=Song") == -1){
-
+	
+	//LinkOwner is being placed in as the Artist for things that aren't spots.
 	str = linkOwner + "~" + album + "~" + title + "~" + runtime + "~" + assetType + "~" + category;
 
 }else{
@@ -266,7 +290,7 @@ if(str.search("Asset_Type=Song") == -1){
 	str = artist + "~" + album + "~" + title + "~" + runtime + "~" + assetType + "~" + category;
 }
 
-//Drops Categories
+//Drops Categories - the "Album=" bits.
 dropCats(str)
 
 //Adds the Triton start and end characters.
