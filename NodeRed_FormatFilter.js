@@ -228,10 +228,12 @@ This is for filtering categories out.
 
 This may not be needed, but I wanted to lay down a bit of groundwork. 
 */
+
+/*COMMENTING THIS OUT BECAUSE IT FREAKED OUT NODERED
 function checkCategory() {
 	//if([a,b,c,d,e].indexOf(x) !== -1) {
 
-	if(goodCats.indexOf(category) !== -1 {
+	if(goodCats.indexOf(category) !== -1) {
 		/*"Category" gets checked against the "goodCats" array, if found, it returns its index
 		If it is not found, it returns -1. This block is where the "good category" consequences
 		are applied, and the "else" will be if -1 is returned.
@@ -241,6 +243,8 @@ function checkCategory() {
 	}
 	
 }
+*/
+
 
 //dropUnused is called for each data point.
 dropUnused(" Asset_Type=")
