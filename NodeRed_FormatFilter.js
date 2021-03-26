@@ -234,10 +234,10 @@ function checkCategory() {
 	//if([a,b,c,d,e].indexOf(x) !== -1) {
 
 	if(goodCats.indexOf(category) !== -1) {
-		/*"Category" gets checked against the "goodCats" array, if found, it returns its index
-		If it is not found, it returns -1. This block is where the "good category" consequences
-		are applied, and the "else" will be if -1 is returned.
-		*/
+		//"Category" gets checked against the "goodCats" array, if found, it returns its index
+		//If it is not found, it returns -1. This block is where the "good category" consequences
+		//are applied, and the "else" will be if -1 is returned.
+		
 	} else {
 		badCat = True
 	}
@@ -287,11 +287,11 @@ This "if" splits it off separate.
 if(str.search("Asset_Type=Song") == -1){
 	
 	//LinkOwner is being placed in as the Artist for things that aren't spots.
-	str = linkOwner + "~" + album + "~" + title + "~" + runtime + "~" + assetType + "~" + category;
+	str = linkOwner + "~" + album + "~" + title + "~" + runtime + "~" + assetType + "~" + category + "~" + isrc;
 
 }else{
  
-	str = artist + "~" + album + "~" + title + "~" + runtime + "~" + assetType + "~" + category;
+	str = artist + "~" + album + "~" + title + "~" + runtime + "~" + assetType + "~" + category + "~" + isrc;
 }
 
 //Drops Categories - the "Album=" bits.
