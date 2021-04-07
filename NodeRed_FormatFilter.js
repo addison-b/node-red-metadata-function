@@ -23,6 +23,7 @@ var taskCommandID = ""
 var albumLabel = ""
 var releaseYear = ""
 var linkOwner = ""
+var tritonSpot = ""
 
 //These are the approved categories for the time being. This may not be in use.
 var goodCats = ["pg1","pg2","pg3"]
@@ -152,6 +153,7 @@ function dropCats(s2) {
         s2 = s2.replace("AlbumLabel=","")
         s2 = s2.replace("ReleaseYear=","")
         s2 = s2.replace("LinkOwner=","")
+	s2 = s2.replace("TritonSpot=","")
             /*The trimExtra function has made this block useless
 			
             catS = s2.search("Category=")
@@ -220,7 +222,8 @@ function dataToVar() {
 	isolateCat("LinkOwner=")
 	linkOwner = catSelection
 	
-	
+	isolateCat("TritonSpot=")
+	tritonSpot = catSelection
 }
 
 /*
@@ -263,6 +266,7 @@ dropUnused(" TaskCommandID=")
 dropUnused(" AlbumLabel=")
 dropUnused(" ReleaseYear=")
 dropUnused(" LinkOwner=")
+dropUnused(" TritonSpot=")
 
 /*
 This blurb here may end up being deprecated later on if I switch semicolons
