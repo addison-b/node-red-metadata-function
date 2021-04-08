@@ -291,11 +291,11 @@ This "if" splits it off separate.
 if(str.search("Asset_Type=Song") == -1){
 	
 	//LinkOwner is being placed in as the Artist for things that aren't spots.
-	str = linkOwner + "~" + album + "~" + title + "~" + runtime + "~" + assetType + "~" + category + "~" + isrc;
+	str = linkOwner + "~" + album + "~" + title + "~" + runtime + "~" + assetType + "~" + category + "~" + isrc + "~" + tritonSpot;
 
 }else{
  
-	str = artist + "~" + album + "~" + title + "~" + runtime + "~" + assetType + "~" + category + "~" + isrc;
+	str = artist + "~" + album + "~" + title + "~" + runtime + "~" + assetType + "~" + category + "~" + isrc + "~" + tritonSpot;
 }
 
 //Drops Categories - the "Album=" bits.
